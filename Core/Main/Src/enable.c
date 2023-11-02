@@ -10,18 +10,20 @@
 
 extern SPI_HandleTypeDef hspi3;
 extern int dataAvailable;
-uint8_t devName[32] = {};
+uint8_t devName[32];
 
 uint8_t buffer[255];
 
 uint16_t stackInitCompleteFlag=0;
 uint8_t* rxEvent;
 
+size_t deviceNameSize = 0;
+
 void ble_init(){
-	size_t size = strlen(deviceName) +1; // +1 per \0
-	if(size > 32);
-		size = 32;
-	memcpy(devName,deviceName,size);
+	deviceNameSize = strlen(deviceName) +1; // +1 per \0
+	if(deviceNameSize > 32)
+		deviceNameSize = 32;
+	memcpy(devName,deviceName,deviceNameSize);
 	devName[31] = '\0';
 
 	//fetching the reset event
@@ -60,7 +62,7 @@ void ble_init(){
 	free(rxEvent);
 
 	//SET THE NAME OF THE BOARD IN THE SERVICE CREATED AUTOMATICALLY
-	updateCharValue(GAP_SERVICE_HANDLE,GAP_CHAR_NAME_HANDLE,0,sizeof(devName),devName);
+	updateCharValue(GAP_SERVICE_HANDLE,GAP_CHAR_NAME_HANDLE,0,deviceNameSize,devName);
 	stackInitCompleteFlag|=0x08;
 	free(rxEvent);
 
@@ -213,24 +215,24 @@ void setConnectable(){
 	   //Start advertising
 	   uint8_t *localname;
 	   int res;
-	   localname=(uint8_t*)malloc(sizeof(devName)+5);//carattere di terminazione+listauid+slavetemp
-	   memcpy(localname,devName,sizeof(devName));
-	   localname[sizeof(devName)+1]=0x00;
-	   localname[sizeof(devName)+2]=0x00;
-	   localname[sizeof(devName)+3]=0x00;
-	   localname[sizeof(devName)+4]=0x00;
-	   localname[sizeof(devName)]=0x00;
+	   localname=(uint8_t*)malloc(deviceNameSize+5);//carattere di terminazione+listauid+slavetemp
+	   memcpy(localname,devName,deviceNameSize);
+	   localname[deviceNameSize+1]=0x00;
+	   localname[deviceNameSize+2]=0x00;
+	   localname[deviceNameSize+3]=0x00;
+	   localname[deviceNameSize+4]=0x00;
+	   localname[deviceNameSize]=0x00;
 
 
-	   ACI_GAP_SET_DISCOVERABLE[11]=sizeof(devName)+1;
-	   ACI_GAP_SET_DISCOVERABLE[3]=sizeof(devName)+5+sizeof(ACI_GAP_SET_DISCOVERABLE)-4;
+	   ACI_GAP_SET_DISCOVERABLE[11]=deviceNameSize+1;
+	   ACI_GAP_SET_DISCOVERABLE[3]=deviceNameSize+5+sizeof(ACI_GAP_SET_DISCOVERABLE)-4;
 
 	   uint8_t *discoverableCommand;
-	   discoverableCommand=(uint8_t*)malloc(sizeof(ACI_GAP_SET_DISCOVERABLE)+sizeof(devName)+5);
+	   discoverableCommand=(uint8_t*)malloc(sizeof(ACI_GAP_SET_DISCOVERABLE)+deviceNameSize+5);
 	   memcpy(discoverableCommand,ACI_GAP_SET_DISCOVERABLE,sizeof(ACI_GAP_SET_DISCOVERABLE));
-	   memcpy(discoverableCommand+sizeof(ACI_GAP_SET_DISCOVERABLE),localname,sizeof(devName)+5);
+	   memcpy(discoverableCommand+sizeof(ACI_GAP_SET_DISCOVERABLE),localname,deviceNameSize+5);
 
-	   sendCommand(discoverableCommand,sizeof(devName)+5+sizeof(ACI_GAP_SET_DISCOVERABLE));
+	   sendCommand(discoverableCommand,deviceNameSize+5+sizeof(ACI_GAP_SET_DISCOVERABLE));
 	   rxEvent=(uint8_t*)malloc(7);
 	   while(!dataAvailable);
 	   res=fetchBleEvent(rxEvent,7);

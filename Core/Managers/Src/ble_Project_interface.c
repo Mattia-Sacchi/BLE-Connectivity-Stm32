@@ -3,6 +3,8 @@
 #include <stdio.h>
 #include <string.h>
 
+char deviceName[] = "ProgettoElettronica";
+
 BleService Service[BS_COUNT];
 BleMessage Messages[BM_COUNT];
 
@@ -95,7 +97,7 @@ char valueInertial[]= "Name: Inertia";
 char valueMagnetic[]= "Name: magnetic";
 char valueGyroscope[]= "Name: gyroscope";
 
-char deviceName[] = "Progetto di elettronica";
+
 
 void ble_setup()
 {
