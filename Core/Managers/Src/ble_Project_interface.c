@@ -65,7 +65,8 @@ void setupNewMessage(BleMessages msg,BleServices service, char * name)
 
 void updateMessage(BleMessages msg, float data)
 {
-
+	memset(MessageString,0,64);
+	// Cleaning array
 	char sign = data<0 ? '-': '+';
 	data = data < 0 ? -data : data;
 	char temp[10];
