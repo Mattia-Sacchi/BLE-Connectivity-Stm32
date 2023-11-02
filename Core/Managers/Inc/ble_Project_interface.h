@@ -10,6 +10,9 @@
 
 #include <stdint.h>
 
+
+extern char deviceName[];
+
 typedef enum
 {
 	BS_INVALID = 0,

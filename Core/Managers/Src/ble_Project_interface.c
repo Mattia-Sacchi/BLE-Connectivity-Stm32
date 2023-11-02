@@ -95,6 +95,8 @@ char valueInertial[]= "Name: Inertia";
 char valueMagnetic[]= "Name: magnetic";
 char valueGyroscope[]= "Name: gyroscope";
 
+char deviceName[] = "Progetto di elettronica";
+
 void ble_setup()
 {
 	setupNewService(BS_ENVIRONMENT,SET_ATTRIBUTES(1+2+3*2+3+3),valueEnvirontment);
