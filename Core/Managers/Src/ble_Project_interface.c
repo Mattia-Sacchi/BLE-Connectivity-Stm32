@@ -65,9 +65,10 @@ void updateMessage(BleMessages msg, float data)
 {
 
 	char sign = data<0 ? '-': '+';
+	data = data < 0 ? -data : data;
 	char temp[10];
 	uint8_t decimalPoint = (data-(int)data)*10;
-	sprintf(temp,"%c%d,%d\0",sign,(uint32_t)data,decimalPoint);
+	sprintf(temp,"%c%d,%d",sign,(int)data,decimalPoint);
 
 	strcat(MessageString,Messages[msg].defaultMessage);
 	strcat(MessageString,temp);

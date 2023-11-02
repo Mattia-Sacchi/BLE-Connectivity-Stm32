@@ -29,6 +29,14 @@
 /* Includes ------------------------------------------------------------------*/
 #include "stm32l4xx_hal_conf.h"
 
+#define ATOMIC_CLEAR_BIT(REG, BIT)                           \
+  do {                                                       \
+    uint32_t val;                                            \
+    do {                                                     \
+      val = __LDREXW((__IO uint32_t *)&(REG)) & ~(BIT);      \
+    } while ((__STREXW(val,(__IO uint32_t *)&(REG))) != 0U); \
+  } while(0)
+
 /** @addtogroup STM32L4xx_HAL_Driver
   * @{
   */

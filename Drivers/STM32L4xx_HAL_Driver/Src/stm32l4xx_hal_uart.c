@@ -3526,13 +3526,7 @@ HAL_StatusTypeDef UART_CheckIdleState(UART_HandleTypeDef *huart)
   * @retval HAL status
   */
 
-#define ATOMIC_CLEAR_BIT(REG, BIT)                           \
-  do {                                                       \
-    uint32_t val;                                            \
-    do {                                                     \
-      val = __LDREXW((__IO uint32_t *)&(REG)) & ~(BIT);      \
-    } while ((__STREXW(val,(__IO uint32_t *)&(REG))) != 0U); \
-  } while(0)
+
 
 HAL_StatusTypeDef UART_WaitOnFlagUntilTimeout(UART_HandleTypeDef *huart, uint32_t Flag, FlagStatus Status,
                                               uint32_t Tickstart, uint32_t Timeout)

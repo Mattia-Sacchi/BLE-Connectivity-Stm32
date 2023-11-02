@@ -18,14 +18,14 @@ static void reset()
 
 static void concat(char * a, char * b)
 {
-	realloc(a,(char) (strlen(a) +strlen(b)));
+	a = realloc(a,(char) (strlen(a) +strlen(b)));
 	strcat(a,b);
 }
 
 
 HAL_StatusTypeDef sendMessage()
 {
-	return HAL_UART_Transmit(&huart1,(char*)txt,strlen(txt),1000);
+	return HAL_UART_Transmit(&huart1,(uint8_t*)txt,strlen(txt),1000);
 	reset();
 }
 

@@ -4,7 +4,8 @@
 #include "general_functions.h"
 #include "enable.h"
 #include <stdlib.h>
-
+#include <stdio.h>
+#include <string.h>
 
 static float temperature = 0, humidity = 0, pressure = 0,
 		accelerometer[3], magnetometer[3] , gyroscope[3];
