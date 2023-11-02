@@ -52,8 +52,6 @@ void idle_enter()
 {
     setTimer(TF_SerialSend, testBSPfunctions, 3000);
 
-    setDigital(MF_led2, GPIO_PIN_RESET);
-
     setDigital(MF_led1,GPIO_PIN_SET);
 
     setTimer(TF_Blink, blink, 500);

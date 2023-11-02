@@ -70,8 +70,6 @@ void Error_Handler(void);
 #define BLE_INT_EXTI_IRQn EXTI9_5_IRQn
 #define BLE_CS_Pin GPIO_PIN_13
 #define BLE_CS_GPIO_Port GPIOD
-#define TOF_RESET_Pin GPIO_PIN_6
-#define TOF_RESET_GPIO_Port GPIOC
 #define BLE_RESET_Pin GPIO_PIN_8
 #define BLE_RESET_GPIO_Port GPIOA
 /* USER CODE BEGIN Private defines */
