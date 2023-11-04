@@ -39,7 +39,7 @@ If you installed STM32CubeIDE click on the *.project* file and the IDE will impo
 
 ## Name of the device
 
-The name of the device can be edited in the file *enable.c* the address instead will be fixed.
+The name of the device can be edited in the file *ble_project_interface.c* the address instead will be fixed.
 
 ## Flash the code
 
@@ -50,12 +50,9 @@ Connect the board to your pc using the (USB ST-link) connector, click on *run* o
 You may also want to read the data directly from the *BLE Server*. For this there are Free OpenSource software.
 
 We recommend ***nRF Connect*** (free OpenSource software) of *NordicSemiconductor* available in [Desktop](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-desktop): on Windows, macOS and Linux. And in [Mobile](https://www.nordicsemi.com/Software-and-tools/Development-Tools/nRF-Connect-for-mobile): on Android and iOS (The mobile version is very simple and more comfortable to debug).
-It only needs to be connected to the *STM32ToTangle* and it will be able to read the data from the sensors found in the Characteristics Values
-
-Note that when you have a device connected to STM32ToTangle the Gateway will not be able to read the data.
 
 ## Bluetooth Usage
-You may look the ble_interface.h/c files, in particular the Services and Messages enums.
+You may look the ble_project_interface.h/c files, in particular the Services and Messages enums.
 In the interface setup you can automatically setup service and charateristic through adding the enum and then call the respective setup function.
 In the setup the IDs will be automatically assigned
 
