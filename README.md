@@ -57,4 +57,6 @@ In the interface setup you can automatically setup service and charateristic thr
 In the setup the IDs will be automatically assigned
 
 ## Twin android application
-
+You may want read the charateristic with your phone/android-device, we developed a android basic app in order to do that: 
+https://github.com/Gil-Dannen/Progetto/tree/main-android
+You can build it with android studio, just clone the repository in the branch "main-android" and you're ready to go.
